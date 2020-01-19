@@ -34,7 +34,7 @@
 
         </div>
         <div class="col-md-4">
-            &nbsp;&nbsp;<a href="{% url 'movie:home' %}" class="btn btn-primary"> Add New Movie!!</a>
+            &nbsp;&nbsp;<a href="{% url 'movie:home' %}" class="btn btn-"> Add New Movie!!</a>
         </div>
     </div>
 
@@ -47,8 +47,11 @@
         <div class="row">
             <div class="col-md-9">
 
-                <h2></h2>
-                <p class="article-content"><strong>Movie Name-:</strong>{{data.title}}</p>
+                <p class="article-content"><strong>Movie Name-:</strong>
+                    <a href="https://www.imdb.com/find?q=+{{data.title}}+&ref_=nv_sr_sm">
+                    {{data.title}}
+                    </a>
+                </p>
                 <p class="article-content"><strong>Releasing Year-:</strong> {{data.year}}</p>
 
                 <p class="article-content"><strong>Type-:</strong> {{data.type}}</p>
