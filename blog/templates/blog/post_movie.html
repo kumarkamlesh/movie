@@ -1,0 +1,70 @@
+{% extends "blog/base.html" %}
+
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/post.css' %}">
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+    <h2>Add New Movie!!</h2>
+    <br>
+    <form method="post" action="{% url 'movie:movie_post' %}">
+        {% csrf_token %}
+
+        {% if messages %}
+        {% for message in messages %}
+        <p class="alert alert-warning alert-dismissible m-0">
+            <a href="#" class="close" data-dismiss="alert"
+               aria-label="close">&times;</a>
+            <strong>{{ message }}</strong>
+        </p>
+        {% endfor %}
+        {% endif %}
+
+        <div class="row">
+            <div class="col-25">
+                &nbsp;<label for="m-title">Movie Title</label>
+            </div>
+            <div class="col-25">
+                <input type="text" id="m-title" name="movie_title" placeholder="Your movie..">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                &nbsp;<label for="m-genre">Genre</label>
+            </div>
+            <div class="col-25">
+                <input type="text" id="m-genre" name="genre" placeholder="Your genre..">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                &nbsp;<label for="m-director">Director</label>
+            </div>
+            <div class="col-25">
+
+                <input type="text" id="m-director" name="director" placeholder="Director..">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                &nbsp; <label for="m-cast">Cast</label>
+            </div>
+            <div class="col-25">
+
+                <input type="text" id="m-cast" name="cast" placeholder="Cast..">
+
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<div class="container" style="width:60%;">
+    <div class="row">
+        <div class="col-md-8">
+
+
+            <form method="post" action="{% url 'movie:movie_detail' %}">
+                {% csrf_token %}
+                {% if messages %}
+                {% for message in messages %}
+                <p class="alert alert-warning alert-dismissible m-0">
+                    <a href="#" class="close" data-dismiss="alert"
+                       aria-label="close">&times;</a>
+                    <strong>{{ message }}</strong>
+                </p>
+                {% endfor %}
+                {% endif %}
+                <div class="row">
+
+                    <div style="border:2px solid #dddddd;border-radius:36px;width:400px;">
+                        <input type="text" style="border-radius:36px;width:100% "
+                               name="search_movie" placeholder="Search movie!!" required>
+
+                    </div>
+                    <br>
+                    <button type="submit" class="btn-sm btn-primary" style="border-radius:14px;">
+                        Search
+                    </button>
+                </div>
+            </form>
+
+
+        </div>
+        <div class="col-md-4">
+            &nbsp;&nbsp;<a href="{% url 'movie:home' %}" class="btn btn-primary"> Add New Movie!!</a>
+        </div>
+    </div>
+
+</div>
+
+<br><br>
+<div class="container" style="width:60%">
+    {% for data in obj %}
+    <article class="media content-section">
+        <div class="row">
+            <div class="col-md-9">
+
+                <h2></h2>
+                <p class="article-content"><strong>Movie Name-:</strong>{{data.title}}</p>
+                <p class="article-content"><strong>Releasing Year-:</strong> {{data.year}}</p>
+
+                <p class="article-content"><strong>Type-:</strong> {{data.type}}</p>
+                <p class="article-content"><strong>Director-:</strong> {{data.director}}</p>
+                <p class="article-content"><strong>Genre-:</strong> {{data.genre}}</p>
+                <p class="article-content"><strong>Movie Cast-:</strong> {{data.cast_member}}</p>
+                <a href="{% url 'movie:delete' data.id %}" class="btn btn-danger">Delete?</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'movie:edit' data.id %}" class="btn btn-primary">Edit?</a>
+            </div>
+
+            <div class="col-md-3">
+                {% if data.image %}
+                <img src="{{ data.image }}" alt="not found">
+                {% else %}
+                <h2>Image Not Found!!</h2>
+                {% endif %}
+            </div>
+        </div>
+    </article>
+    {% endfor %}
+
+</div>
+
+<br><br>
+{% endblock %}

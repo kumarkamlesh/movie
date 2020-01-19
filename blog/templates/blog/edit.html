@@ -1,0 +1,81 @@
+{% extends "blog/base.html" %}
+
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'blog/post.css' %}">
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+    <h2>Edit Movie!!</h2>
+    <br>
+    <form method="post" action="{% url 'movie:edit_data' movie.id %}">
+        {% csrf_token %}
+        {% if movie %}
+
+        <div class="row">
+            <div class="col-25">
+                &nbsp;<label for="m-title">Movie Title</label>
+            </div>
+            <div class="col-25">
+                <input type="text" id="m-title" name="movie_title" value="{{movie.title}}" readonly>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                &nbsp;<label for="m-year">Movie Year</label>
+            </div>
+            <div class="col-25">
+                <input type="text" id="m-year" name="year" value="{{movie.year}}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                &nbsp;<label for="m-type">Movie Type</label>
+            </div>
+            <div class="col-25">
+                <input type="text" id="m-type" name="type" value="{{movie.type}}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                &nbsp;<label for="m-genre">Genre</label>
+            </div>
+            <div class="col-25">
+                <input type="text" id="m-genre" name="genre" value="{{movie.genre}}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                &nbsp;<label for="m-director">Director</label>
+            </div>
+            <div class="col-25">
+
+                <input type="text" id="m-director" name="director" value="{{movie.director}}">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                &nbsp; <label for="m-cast">Cast</label>
+            </div>
+            <div class="col-25">
+
+                <input type="text" id="m-cast" name="cast" value="{{movie.cast_member}}">
+
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <input type="submit" value="Submit">
+        </div>
+        {% endif %}
+    </form>
+</div>
+
+{% endblock %}
