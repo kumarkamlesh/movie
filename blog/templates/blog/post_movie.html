@@ -13,12 +13,11 @@
     <br>
     <form method="post" action="{% url 'movie:movie_post' %}">
         {% csrf_token %}
-
         {% if messages %}
         {% for message in messages %}
-        <p class="alert alert-warning alert-dismissible m-0">
+        <p class="alert alert-warning alert-dismissible fade show">
             <a href="#" class="close" data-dismiss="alert"
-               aria-label="close">&times;</a>
+                                   aria-label="close">&times;</a>
             <strong>{{ message }}</strong>
         </p>
         {% endfor %}

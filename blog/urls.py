@@ -5,7 +5,6 @@ from blog.views import (
     movie_post, detail,
     delete_view, edit_view,
     edit_data
-    # link_movie
 )
 
 app_name = 'movie'
@@ -19,7 +18,5 @@ urlpatterns = [
     path('delete/<int:id>/', delete_view, name='delete'),
     path('edit/<int:id>/', edit_view, name='edit'),
     path('edit/data/<int:id>/', edit_data, name='edit_data'),
-
-    # path('link/<str:title>/', link_movie, name='link'),
 
 ]

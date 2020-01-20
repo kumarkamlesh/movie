@@ -35,32 +35,37 @@ def movie_post(request):
         cast = request.POST['cast']
 
         val = requests.get('http://www.omdbapi.com/?s=' + title + '&apikey=514904fe')
-        movie = val.content.decode("utf-8")
-        search = literal_eval(movie)
-        search_list = search.get("Search")
-        year = ''
-        poster_image = ''
-        type_ = ''
-        for search in search_list:
-            if search["Title"] == title:
-                poster_image = search.get('Poster')
-                year = search.get('Year')
-                type_ = search.get('Type')
-        obj = Movie()
-        obj.title = title
-        obj.year = year
-        obj.type = type_
-        obj.image = poster_image
-        obj.director = director
-        obj.genre = genre
-        obj.cast_member = cast
-        if Movie.objects.filter(title=title):
-            messages.warning(request, "Movie Already Exist!!")
-            return redirect("movie:home")
-        else:
-            obj.save()
+        if val:
+            movie = val.content.decode("utf-8")
+            search = literal_eval(movie)
+            search_list = search.get("Search")
+            if search_list:
+                year = ''
+                poster_image = ''
+                type_ = ''
+                for search in search_list:
+                    if search["Title"] == title:
+                        poster_image = search.get('Poster')
+                        year = search.get('Year')
+                        type_ = search.get('Type')
+                obj = Movie()
+                obj.title = title
+                obj.year = year
+                obj.type = type_
+                obj.image = poster_image
+                obj.director = director
+                obj.genre = genre
+                obj.cast_member = cast
+                if Movie.objects.filter(title=title):
+                    messages.warning(request, "Movie Already Exist!!")
+                    return redirect("movie:home")
+                else:
+                    obj.save()
 
-    return redirect('movie:dd')
+                return redirect('movie:dd')
+            else:
+                messages.warning(request, 'Movie not found!!!')
+                return redirect('movie:home')
 
 
 def detail(request):
@@ -116,11 +121,3 @@ def edit_data(request, id):
             obj.save()
 
         return redirect('movie:dd')
-
-
-# def link_movie(request, title):
-#     movie = Movie.objects.get(title=title)
-#     print(movie)
-#     val = requests.get('http://www.omdbapi.com/?callback=' + str(movie) + '&apikey=514904fe')
-#
-#     return val
