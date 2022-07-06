@@ -3,7 +3,7 @@ chardet==3.0.4
 Django==2.2.6
 idna==2.8
 IMDbPY==6.8
-lxml==4.4.2
+lxml==4.9.1
 omdb==0.10.1
 Pillow==7.0.0
 psycopg2==2.8.4
